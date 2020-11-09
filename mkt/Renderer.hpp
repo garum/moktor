@@ -1,11 +1,21 @@
 #pragma once
+#include "Shader.hpp"
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 
-class Renderer {
-	public :
-		Renderer();
-		void printState();
-		int interger;
-};
+namespace mkt {
+	class Renderer {
+
+
+		public:
+			Renderer();
+			~Renderer();
+			void init();
+			void renderScene();
+
+
+		private:
+			unsigned int VBO;
+			unsigned int VAO;
+	
+	};
+}
