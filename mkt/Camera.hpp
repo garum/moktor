@@ -6,7 +6,7 @@
 
 #include <string>
 
-namespace gps {
+namespace mkt {
     
     enum MOVE_DIRECTION {MOVE_FORWARD, MOVE_BACKWARD, MOVE_RIGHT, MOVE_LEFT};
     

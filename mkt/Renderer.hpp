@@ -1,8 +1,18 @@
 #pragma once
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "Shader.hpp"
+#include "Camera.hpp"
+#include "Texture.hpp"
+
 
 
 namespace mkt {
+	
+
 	class Renderer {
 
 
@@ -10,7 +20,9 @@ namespace mkt {
 			Renderer();
 			~Renderer();
 			void init();
+			void initRenderSprite();
 			void renderScene();
+			void renderSprite(Texture2D texture);
 
 
 		private:

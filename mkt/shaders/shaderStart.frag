@@ -1,12 +1,13 @@
-#version 400
+#version 330 core
+in vec2 TexCoords;
+out vec4 color;
 
-in vec3 colour;
-in vec2 passTexture;
+uniform sampler2D image;
+uniform vec3 spriteColor;
 
-out vec4 fragmentColour;
-uniform sampler2D textureSampler;
-
-void main() {
-    fragmentColour = texture(textureSampler, passTexture); 
-
-}
+void main()
+{    
+    color =  texture(image, TexCoords);
+      if(color.a < 0.1)
+        discard;
+}  

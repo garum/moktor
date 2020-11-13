@@ -1,6 +1,6 @@
 #include "Camera.hpp"
 
-namespace gps {
+namespace mkt {
 
     //Camera constructor
     Camera::Camera(glm::vec3 cameraPosition, glm::vec3 cameraTarget, glm::vec3 cameraUp) {

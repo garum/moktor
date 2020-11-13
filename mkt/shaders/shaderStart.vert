@@ -1,19 +1,14 @@
-#version 400
+#version 330 core
+layout (location = 0) in vec4 vertex; // <vec2 position, vec2 texCoords>
 
-layout(location = 0) in vec3 vertexPosition;
-layout(location = 1) in vec3 vertexNormal;
-layout(location = 2) in vec2 textcoord;
-
-out vec3 colour;
-out vec2 passTexture;
-
+out vec2 TexCoords;
 
 uniform mat4 model;
-uniform mat4 view;
 uniform mat4 projection;
 
-void main() {
-    colour = vertexNormal;
-    passTexture = textcoord;
-    gl_Position = projection * view * model * vec4(vertexPosition, 1.0);
+void main()
+{
+    TexCoords = vertex.zw;
+    //gl_Position = projection * model * vec4(vertex.xy, 0.0, 1.0);
+    gl_Position =  vec4(vertex.xy, 0.0, 1.0);
 }
