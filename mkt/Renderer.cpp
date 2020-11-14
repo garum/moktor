@@ -3,7 +3,6 @@
 #include "stdio.h"
 
 
-mkt::Camera myCamera(glm::vec3(0.0f, 5.0f, 15.0f), glm::vec3(0.0f, 2.0f, -10.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 unsigned int texture;
 
 
@@ -82,32 +81,49 @@ namespace mkt{
 	{
 		myShader.useShaderProgram();
 		glViewport(0, 0, 640, 480);
-		glm::mat4 view = myCamera.getViewMatrix();
+		//glm::mat4 view = myCamera.getViewMatrix();
 		GLint  viewLocation = glGetUniformLocation(myShader.shaderProgram, "view");
-		glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
+		//glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
 
 
 		//std::cout << glm::to_string(view);
-		myCamera.move(mkt::MOVE_LEFT, 0.1f);
+		//myCamera.move(mkt::MOVE_LEFT, 0.1f);
 		glm::mat4 model = glm::mat4(1.0f);
 
 		GLint modelLocation = glGetUniformLocation(myShader.shaderProgram, "model");
-		glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(model));
+		//glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(model));
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glBindVertexArray(VAO);
 
 	}
 
-	void Renderer::renderSprite(Texture2D texture)
+	void Renderer::renderSprite(Texture2D texture,Camera camera)
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glBindTexture(GL_TEXTURE_2D, texture.ID);
 		myShader.useShaderProgram();
-	
+		
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.5f , 0.5f , 0.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::translate(model, glm::vec3(-0.5f , -0.5f , 0.0f));
 
+		GLint modelLoc=glGetUniformLocation(myShader.shaderProgram, "model");
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE ,glm::value_ptr(model));
+
+		GLint viewLoc = glGetUniformLocation(myShader.shaderProgram, "view");
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera.getViewMatrix()));
+
+		glm::mat4 proj = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+
+
+		GLint projLoc = glGetUniformLocation(myShader.shaderProgram, "projection");
+		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
+
+		
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);

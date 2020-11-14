@@ -22,7 +22,7 @@ namespace mkt {
 			void init();
 			void initRenderSprite();
 			void renderScene();
-			void renderSprite(Texture2D texture);
+			void renderSprite(Texture2D texture,Camera camera);
 
 
 		private:

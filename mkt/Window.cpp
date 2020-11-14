@@ -23,7 +23,6 @@ namespace mkt {
 		glewExperimental = GL_TRUE;
 		glewInit();
 
-		glfwSetKeyCallback(this->glWindow, Window::key_callback);
 		glfwSetFramebufferSizeCallback(this->glWindow, Window::framer_buffer_callback);
 
 		// get version info
@@ -46,6 +45,12 @@ namespace mkt {
 		glfwTerminate();
 	}
 
+	void Window::setKeycallback(void (*f)(GLFWwindow* window,int key, int scancode, int action, int mods))
+	{
+		glfwSetKeyCallback(this->glWindow, f);
+		
+	}
+
 	void Window::run(void (*gameloop)())
 	{
 		while (!glfwWindowShouldClose(this->glWindow))
@@ -66,4 +71,6 @@ namespace mkt {
 	{
 		return this->glWindow;
 	}
+	
+
 }
