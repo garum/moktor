@@ -7,6 +7,7 @@
 #include "Shader.hpp"
 #include "Camera.hpp"
 #include "Texture.hpp"
+#include "../Sprite.hpp"
 
 
 
@@ -22,7 +23,7 @@ namespace mkt {
 			void init();
 			void initRenderSprite();
 			void renderScene();
-			void renderSprite(Texture2D texture,Camera camera);
+			void renderSprite(Sprite sprite,Camera camera);
 
 
 		private:

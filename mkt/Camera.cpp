@@ -17,7 +17,11 @@ namespace mkt {
     //return the view matrix, using the glm::lookAt() function
     glm::mat4 Camera::getViewMatrix() {
         //TODO
-        return glm::lookAt(cameraPosition, cameraTarget, this->cameraUpDirection);
+        /*return glm::lookAt(cameraPosition, cameraTarget, this->cameraUpDirection);*/
+        glm::mat4 view=glm::mat4(1.0);
+        view = glm::translate(view, cameraPosition);
+        return view;
+
     }
 
     //update the camera internal parameters following a camera move event
@@ -30,6 +34,11 @@ namespace mkt {
             cameraPosition += speed * cameraRightDirection;
         if (direction == MOVE_RIGHT)
             cameraPosition -= speed * cameraRightDirection;
+        if(direction == MOVE_UP)
+            cameraPosition += speed * cameraUpDirection;
+        if (direction == MOVE_DOWN)
+            cameraPosition -= speed * cameraUpDirection;
+
         //TODO
     }
 

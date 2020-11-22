@@ -8,7 +8,7 @@
 
 namespace mkt {
     
-    enum MOVE_DIRECTION {MOVE_FORWARD, MOVE_BACKWARD, MOVE_RIGHT, MOVE_LEFT};
+    enum MOVE_DIRECTION {MOVE_FORWARD, MOVE_BACKWARD, MOVE_RIGHT, MOVE_LEFT,MOVE_UP,MOVE_DOWN};
     
     class Camera
     {
@@ -23,9 +23,9 @@ namespace mkt {
         //yaw - camera rotation around the y axis
         //pitch - camera rotation around the x axis
         void rotate(float pitch, float yaw);
-        
-    private:
         glm::vec3 cameraPosition;
+
+    private:
         glm::vec3 cameraTarget;
         glm::vec3 cameraFrontDirection;
         glm::vec3 cameraRightDirection;
