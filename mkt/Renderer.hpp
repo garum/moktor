@@ -7,7 +7,7 @@
 #include "Shader.hpp"
 #include "Camera.hpp"
 #include "Texture.hpp"
-#include "../Sprite.hpp"
+#include "Sprite.hpp"
 
 
 

@@ -28,7 +28,6 @@ Texture2D::~Texture2D()
 void Texture2D::loadTexture(const char* image)
 {
 	stbi_set_flip_vertically_on_load(true);
-	
 	this->data = stbi_load(image, &this->width, &this->height, &this->nrChannels, 0);
 }
 
@@ -36,7 +35,7 @@ void Texture2D::bind() {
 	glBindTexture(GL_TEXTURE_2D, ID);
 }
 
-void Texture2D::generate()
+void Texture2D::generate(const char* imagePath)
 {
 	// load texture
 	glGenTextures(1, &ID);
@@ -51,11 +50,13 @@ void Texture2D::generate()
 
 
 	//exture2D textureImg = Texture2D();
-	this->loadTexture("D:\\Project\\game_engine\\extras\\awesomeface.png");
+	this->loadTexture(imagePath);
 	if (this->data == nullptr)
 	{
 		fprintf(stderr, "error: could not load texture");
 	}
 	glTexImage2D(GL_TEXTURE_2D, 0, INTERNAL_FORMAT, this->width, this->height, 0, FORMAT, GL_UNSIGNED_BYTE, this->data);
 	glGenerateMipmap(GL_TEXTURE_2D);
+	delete this->data;
+	this->data = nullptr;
 }

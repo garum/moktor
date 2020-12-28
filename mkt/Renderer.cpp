@@ -100,17 +100,13 @@ namespace mkt{
 
 	void Renderer::renderSprite(Sprite sprite,Camera camera)
 	{
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		
 		Texture2D texture = sprite.getTexture();
 
 		glBindTexture(GL_TEXTURE_2D, texture.ID);
 		myShader.useShaderProgram();
 		
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.5f , 0.5f , 0.0f));
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-		model = glm::translate(model, glm::vec3(-0.5f , -0.5f , 0.0f));
+		
 
 		GLint modelLoc=glGetUniformLocation(myShader.shaderProgram, "model");
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE ,glm::value_ptr(sprite.getModelMatrix()));
@@ -118,10 +114,9 @@ namespace mkt{
 		GLint viewLoc = glGetUniformLocation(myShader.shaderProgram, "view");
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera.getViewMatrix()));
 		//glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)));
-		glm::mat4 proj = glm::ortho(0.0f,800.0f, 0.0f, 600.0f, -10.0f, 10.0f);
 
 		GLint projLoc = glGetUniformLocation(myShader.shaderProgram, "projection");
-		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
+		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(camera.getProjectionMatrix()));	
 
 		
 		glBindVertexArray(VAO);

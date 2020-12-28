@@ -48,4 +48,10 @@ namespace mkt {
     void Camera::rotate(float pitch, float yaw) {
         //TODO
     }
+
+    glm::mat4 Camera::getProjectionMatrix() {
+        glm::mat4 proj = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, -10.0f, 10.0f);
+
+        return proj;
+    }
 }

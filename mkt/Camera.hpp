@@ -1,6 +1,4 @@
-#ifndef Camera_hpp
-#define Camera_hpp
-
+#pragma once
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 
@@ -23,6 +21,7 @@ namespace mkt {
         //yaw - camera rotation around the y axis
         //pitch - camera rotation around the x axis
         void rotate(float pitch, float yaw);
+        glm::mat4 getProjectionMatrix();
         glm::vec3 cameraPosition;
 
     private:
@@ -30,10 +29,10 @@ namespace mkt {
         glm::vec3 cameraFrontDirection;
         glm::vec3 cameraRightDirection;
         glm::vec3 cameraUpDirection;
-
+        glm::mat4 projectionMatrix;
       
     };
     
 }
 
-#endif /* Camera_hpp */
+
